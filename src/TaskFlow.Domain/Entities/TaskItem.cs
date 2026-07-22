@@ -9,7 +9,7 @@ namespace TaskFlow.Domain.Entities
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
-        public TaskStatus Status { get; private set; }
+        public TaskItemStatus Status { get; private set; }
         public Priority Priority { get; private set; }
         public Guid ProjectId { get; private set; }
         public Guid? AssignedToId { get; private set; }
@@ -20,7 +20,7 @@ namespace TaskFlow.Domain.Entities
 
         protected TaskItem() { } // For EF Core
 
-        public static TaskItem Create(Guid id, string title, string description, TaskStatus status, Priority priority, Guid projectId, Guid? assignedToId, DateTime dueDate, DateTime createdAt)
+        public static TaskItem Create(Guid id, string title, string description, TaskItemStatus status, Priority priority, Guid projectId, Guid? assignedToId, DateTime? dueDate, DateTime createdAt)
         {
             if (string.IsNullOrEmpty(title))
                 throw new DomainException("Title cannot be empty.");
@@ -40,7 +40,7 @@ namespace TaskFlow.Domain.Entities
             };
         }
 
-        public void Update(string title, string description, TaskStatus status, Priority priority, Guid? assignedToId, DateTime dueDate)
+        public void Update(string title, string description, TaskItemStatus status, Priority priority, Guid? assignedToId, DateTime? dueDate)
         {
             if (string.IsNullOrEmpty(title))
                 throw new DomainException("Title cannot be empty.");
